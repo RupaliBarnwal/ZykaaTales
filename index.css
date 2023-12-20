@@ -23,8 +23,7 @@
 .rescard{
     margin:10px;
     padding:5px;
-    width:200px;
-    height:310px;
+    width:250px;
 }
 .rescard:hover{
     cursor: pointer;
