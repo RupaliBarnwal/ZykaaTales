@@ -2,6 +2,8 @@ import RestroCard from "./RestroCard";
 // import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { REST_LINK } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 
 const Body = () => {
@@ -14,13 +16,13 @@ const Body = () => {
       fetchData();
      }, []);
      const fetchData= async ()=>{
-      const data= await fetch ("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.6072861&lng=77.2933104&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      const data= await fetch ( REST_LINK
       );
       const json= await data.json();
       console.log(json);
-      console.log(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-      setRestroList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestro(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      // console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)     
+      setRestroList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setfilteredRestro(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      };
 
      
@@ -52,7 +54,7 @@ const Body = () => {
         <div className="rest-container">
           {
               filteredRestro.map((restrorant)=>(
-                <RestroCard key={restrorant.info.id} resData={restrorant}/>
+                <Link key={restrorant.info.id} to={"/Restaurant/"+ restrorant.info.id}><RestroCard  resData={restrorant}/></Link>
                 ))}
         </div>
       </div>
