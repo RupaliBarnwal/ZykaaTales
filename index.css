@@ -55,3 +55,8 @@
 .filter{
     display: flex;
 }
+.user-card{
+    width: 250px;
+    height: 400px;
+    padding: 10px;
+}

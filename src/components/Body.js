@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { REST_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const Body = () => {
@@ -24,7 +25,10 @@ const Body = () => {
       setRestroList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setfilteredRestro(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      };
-
+     
+     const onlineStatus= useOnlineStatus();
+     if(onlineStatus === false) 
+     return <h1>Looks like you are offline, please check your internet connection!!</h1>
      
     return restroList.length==0  ? (<Shimmer/>) :(
       <div className="body">
