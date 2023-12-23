@@ -22,8 +22,8 @@ const Body = () => {
       const json= await data.json();
       console.log(json);
       // console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)     
-      setRestroList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestro(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setRestroList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setfilteredRestro(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      };
      
      const onlineStatus= useOnlineStatus();
