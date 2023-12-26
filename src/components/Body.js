@@ -22,8 +22,8 @@ const Body = () => {
       const json= await data.json();
       console.log(json);
       // console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)     
-      setRestroList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestro(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setRestroList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setfilteredRestro(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      };
      
      const onlineStatus= useOnlineStatus();
@@ -32,12 +32,12 @@ const Body = () => {
      
     return restroList.length==0  ? (<Shimmer/>) :(
       <div className="body">
-        <div className="filter">
-          <div className="search">
-            <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+        <div className="flex">
+          <div className="p-4 m-4">
+            <input type="text" className="search-box border border-solid border-black" value={searchText} onChange={(e)=>{
                 setsearchText(e.target.value);
             }}  />
-            <button className="search" onClick={()=>{
+            <button className="px-4 py-0.5 bg-green-100" onClick={()=>{
               // console.log(searchText);
               //setsearchText("");
               const filteredRestro = restroList.filter(
@@ -46,7 +46,8 @@ const Body = () => {
               setfilteredRestro(filteredRestro);
             }}>Search</button>
           </div>
-            <button className="filter-btn" 
+          <div className="p-4 m-4">
+            <button className="px-4 py-0.5 bg-pink-100 rounded-lg" 
             onClick= {()=>{
                const filteredList= restroList.filter(
                 (x)=>x.info.avgRating > 4
@@ -54,8 +55,9 @@ const Body = () => {
                 setfilteredRestro(filteredList);
                 //console.log("button")
             }}>Top Rated Restrorant</button>
+            </div>
         </div>
-        <div className="rest-container">
+        <div className="flex flex-wrap px-12">
           {
               filteredRestro.map((restrorant)=>(
                 <Link key={restrorant.info.id} to={"/Restaurant/"+ restrorant.info.id}><RestroCard  resData={restrorant}/></Link>
