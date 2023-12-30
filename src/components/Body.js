@@ -1,4 +1,4 @@
-import RestroCard from "./RestroCard";
+import RestroCard, {withPromotedLabel} from "./RestroCard";
 // import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
@@ -12,6 +12,9 @@ const Body = () => {
     const [filteredRestro, setfilteredRestro]= useState([]);
 
     const [searchText, setsearchText]= useState("");
+
+    const RestaurantCardPromoted= withPromotedLabel(RestroCard);
+    
     //console.log(resList);
     useEffect(()=>{
       fetchData();
@@ -22,8 +25,8 @@ const Body = () => {
       const json= await data.json();
       console.log(json);
       // console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants)     
-      setRestroList(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setfilteredRestro(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setRestroList(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      setfilteredRestro(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      };
      
      const onlineStatus= useOnlineStatus();
@@ -60,7 +63,14 @@ const Body = () => {
         <div className="flex flex-wrap px-12">
           {
               filteredRestro.map((restrorant)=>(
-                <Link key={restrorant.info.id} to={"/Restaurant/"+ restrorant.info.id}><RestroCard  resData={restrorant}/></Link>
+                <Link key={restrorant.info.id} to={"/Restaurant/"+ restrorant.info.id}>
+                  {
+                    restrorant.info.isOpen ? (<RestaurantCardPromoted resData={restrorant}/>
+                     ):(
+                     <RestroCard  resData={restrorant}/>
+                  
+                  )}
+                  </Link>
                 ))}
         </div>
       </div>
