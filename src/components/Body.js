@@ -1,10 +1,11 @@
 import RestroCard, {withPromotedLabel} from "./RestroCard";
 // import resList from "../utils/mockData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { REST_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const Body = () => {
@@ -14,6 +15,8 @@ const Body = () => {
     const [searchText, setsearchText]= useState("");
 
     const RestaurantCardPromoted= withPromotedLabel(RestroCard);
+
+    const {loggedInUser, setUserName}= useContext(UserContext);
     
     //console.log(resList);
     useEffect(()=>{
@@ -37,7 +40,8 @@ const Body = () => {
       <div className="body">
         <div className="flex">
           <div className="p-4 m-4">
-            <input type="text" className="search-box border border-solid border-black" value={searchText} onChange={(e)=>{
+            <input type="text" className="search-box border border-solid border-black"
+             value={searchText} onChange={(e)=>{
                 setsearchText(e.target.value);
             }}  />
             <button className="px-4 py-0.5 bg-green-100" onClick={()=>{
@@ -58,6 +62,13 @@ const Body = () => {
                 setfilteredRestro(filteredList);
                 //console.log("button")
             }}>Top Rated Restrorant</button>
+            </div>
+            <div className="p-4 m-4">
+              <label>UserName :</label>
+            <input type="text" className="border border-black p-2" valse={loggedInUser}
+            onChange={(e)=>{
+              setUserName(e.target.value);
+            }}/>
             </div>
         </div>
         <div className="flex flex-wrap px-12">

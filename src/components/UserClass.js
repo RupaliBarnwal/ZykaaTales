@@ -20,7 +20,7 @@ class UserClass extends React.Component{
         // console.log("Child component Did Mount");
         const data= await fetch("https://api.github.com/users/RupaliBarnwal");
         const json= await data.json();
-        console.log(json);
+        // console.log(json);
 
         this.setState ({
             userInfo : json,
@@ -28,7 +28,7 @@ class UserClass extends React.Component{
 
     }
     render(){
-        console.log("child render");
+        // console.log("child render");
         return(
             <div className="user-card">
         <h1>{this.state.userInfo.name}</h1>
