@@ -4,13 +4,18 @@ import { useState , useContext} from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   // let btnName="Login";
   const[btnName, setbtnName]=useState(["LogIn"])
 
   const {loggedInUser}= useContext(UserContext); /// React context
-  console.log(loggedInUser);
+  //console.log(loggedInUser);
+
+  // subscribing to the store using a selector, selector is the hook
+  const cartItems= useSelector ((store)=> store.cart.items);
+  console.log(cartItems)
 
   const onlineStatus= useOnlineStatus();
     return (
@@ -27,7 +32,7 @@ const Header = () => {
             <li className="p-2 m-5"><Link to="/about">About Us</Link></li>
             <li className="p-2 m-5"><Link to="/contact">Contact Us</Link></li>
             <li className="p-2 m-5"><Link to="/grocery">Grocery</Link></li>
-            <li className="p-2 m-5"><Link to="/">Cart</Link></li>
+            <li className="p-2 m-5"><Link to="/cart">Cart({cartItems.length} items)</Link></li>
             <button className="px-5 cursor-pointer" onClick={()=>{
               btnName === "LogIn"? setbtnName("LogOut"):setbtnName("LogIn")
             }}>{btnName}</button>
